@@ -52,6 +52,27 @@ do
             {
                 movie.genres.Add("(no genres listed)");
             }
+            // ask user to enter director
+            Console.WriteLine("Enter movie director");
+            // input director
+            input = Console.ReadLine();
+            // default value handling
+            movie.director = input.Length > 3 ? input : "unassigned";
+            // ask user to enter movie run time
+            Console.WriteLine("Enter running time (h:m:s)");
+            // input run time
+            input = Console.ReadLine();
+            // default value handling
+            TimeSpan ts;
+            if (TimeSpan.TryParse(input, out ts) && input.Length > 4)
+            {
+                movie.runningTime = ts;
+            }
+            else
+            {
+                movie.runningTime = new TimeSpan(0);
+            }
+
             // add movie
             movieFile.AddMovie(movie);
         }
