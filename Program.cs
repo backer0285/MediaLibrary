@@ -17,6 +17,7 @@ do
     // display choices to user
     Console.WriteLine("1) Add Movie");
     Console.WriteLine("2) Display All Movies");
+    Console.WriteLine("3) Find Movie");
     Console.WriteLine("Enter to quit");
     // input selection
     choice = Console.ReadLine();
@@ -85,6 +86,21 @@ do
             Console.WriteLine(m.Display());
         }
     }
-} while (choice == "1" || choice == "2");
+    else if (choice == "3")
+    {
+        string input = "";
+        while (input == "")
+        {
+            Console.WriteLine("Enter title info");
+            input = Console.ReadLine();
+        }
+        var titles = movieFile.Movies.Where(m => m.title.Contains(input, StringComparison.OrdinalIgnoreCase)).Select(m => m.title);
+        Console.WriteLine($"There are {titles.Count()} movies with {input} in the title:");
+        foreach (string t in titles)
+        {
+            Console.WriteLine($"  {t}");
+        }
+    }
+} while (choice == "1" || choice == "2" || choice == "3");
 
 logger.Info("Program ended");
